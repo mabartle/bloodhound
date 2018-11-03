@@ -1,0 +1,10 @@
+/*Styles and characteristics for the content page (the navigation frame)*/
+body {background: #CCCCCC  }
+h1 {font-family: serif;font-size: 90%;font-style:italic;text-align:center;font-weight:700}
+h3 {font-family: serif;font-style:italic;text-align:left;font-weight:900}
+a:link {color: #0000FF}
+a:visited {color: #0000FF }
+a:hover {color: #FF00FF}
+a:active {color: #0000FF}
+/*a {font-size:15px}*/
+
