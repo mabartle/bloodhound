@@ -21,7 +21,7 @@ echo "DATE: ${DATE} HOSTID: ${HOSTID} CAPFILE: ${CAPFILENOW} INTERFACE: ${INT} C
 
 cap_start(){
 CAPSTARTTIME=`date +%H%M`
-/usr/sbin/dumpcap -i $INT -a duration:$CAPDUR -a filesize:$CAPFILESIZE -w $DUMPDIR/$CAPFILENOW
+/usr/bin/dumpcap -i $INT -a duration:$CAPDUR -a filesize:$CAPFILESIZE -w $DUMPDIR/$CAPFILENOW
 #/usr/sbin/tcpdump -i $INT -s0 -c $PKTCNT -w $DUMPDIR/$CAPFILENOW
 CAPENDTIME=`date +%H%M`
 }

@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 #OWNER: MARK BARTLETT
 #DATE: 11/02/2018
 #THIS IS THE CAPTURE SCRIPT##
 #LOCATION OF CONF FILE#
-source /opt/BHCOL/CONF/bh.conf
+source /opt/BH/BHCOL/CONF/bh.conf
+#source /opt/BHCOL/CONF/bh.conf
 #LOCATION OF FUNCTION FILE#
-source /opt/BHCOL/FUNCS/funky.func
+#source /opt/BHCOL/FUNCS/funky.func
+source /opt/BH/BHCOL/FUNCS/funky.func
 
 #FUNCTION TO CHECK FOR RUN LOG DIRECTORY#
 check_runlogdirectory
