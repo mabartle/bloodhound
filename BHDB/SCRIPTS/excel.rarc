@@ -1,0 +1,40 @@
+#
+#  Argus Software
+#  Copyright (c) 2000-2008 QoSient, LLC
+#  All rights reserved.
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2, or (at your option)
+#  any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Excel rc file.
+#
+# This ra rc file will generate ascii output suitable to be imported
+# into Microsoft Excel or Microsoft Access as a comma separated value file.
+# This is good for graphing, etc....
+
+#RA_PRINT_LABELS=0
+RA_FIELD_DELIMITER=','
+RA_PRINT_NAMES=none
+#RA_FIELD_SPECIFIER="stime flgs proto saddr sport dir daddr dport pkts bytes state"
+RA_FIELD_SPECIFIER="srcid stime ltime dur saddr daddr proto sport dport bytes sbytes dbytes pkts spkts dpkts dir trans seq flgs"
+
+#RA_FIELD_SPECIFIER="srcid stime ltime dur saddr daddr proto sport dport bytes sbytes dbytes pkts spkts dpkts dir trans seq flgs"
+#RA_FIELD_SPECIFIER="srcid, stime, ltime, sstime, dstime, dstime, dltime, trans, seq, flgs, dur, avgdur, stddev, mindur, maxdur, saddr, daddr, proto, sport, dport, stos, dtos, sdsb, ddsb, sco, dco, sttl, dttl, sipid, dipid, smpls, dmpls, svlan, dvlan, svid, dvid, svpri, dvpri, spkts, dpkts, sbytes, dbytes, sappbytes, dappbytes, sload, dload, sloss, dloss, sploss, dploss, srate, drate, smac, dmac, dir, sintpkt, dintpkt, sjit, djit, state, suser, duser, swin, dwin, trans, srng, erng, stcpb, dtcpb, tcprtt, inode, offset, smaxsz, dmaxsz, sminsz, dminsz"
+RA_TIME_FORMAT="%Y-%m-%d,%H:%M:%S"
+RA_USEC_PRECISION=6
+RA_FIELD_WIDTH=variable
+#RA_USERDATA_ENCODE=Ascii
+RA_FILTER="not man"
+
