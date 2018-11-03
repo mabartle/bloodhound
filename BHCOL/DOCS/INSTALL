@@ -1,8 +1,13 @@
-1.  Untar BHCOL.tar.gz in the /opt Directory.
+1.  Untar BHCOL.tar.gz in the /opt Directory. Or just pull it directly from the github repo
 2.  Unstall wireshark and necessary dependencies.
-	a.  Wireshark rpms are available in the /BHCOL/PACKS Directory.
-	b.  run the RPM install command in that directory:
-		i.  rpm -ihv /BHCOL/PACKS/*.rpm (this should install all needed RPM files, if not consult the wireshark documentation.
+	a. Install wireshark 
+           i. sudo apt-get install tshark
+        b.  Add the user to the wireshark group
+           i. sudo adduser $USER wireshark 
+        c. Check network interface
+           i. dumpcap -D
+        d. Test it and verify
+           i. dumpcap -i 1 -w ~/output-file 
 3.  Set the appropriate settings in the bh.conf file (/BHCOL/CONF/)
 	a.  Set the HOSTID to the ASSETID#
 	b.  Set the INT to the Interface Name to capture off of.
