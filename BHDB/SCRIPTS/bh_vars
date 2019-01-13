@@ -1,0 +1,31 @@
+#!/bin/sh
+##BH BUILD VERSION
+bh_build_version=BH-2_0-R1
+
+
+##Bloodhound PATH INFO
+bh_install_dir=/opt/BB
+bh_outdir=$bh_install_dir/BB
+bh_archive_dir=$bh_outdir/ARCHIVE
+bh_scripts_dir=$bh_install_dir/SCRIPTS
+#argus_tools_dir=$argus_scripts_dir/TOOLS
+#argus_conf_dir=$argus_install_dir/CONF
+#argus_doc_dir=$argus_install_dir/DOCUMENTATION
+#argus_log_dir=$argus_install_dir/LOGS
+
+
+##ARGUS USER VARIABLES:
+argus_snakeeyes_server_user=bloodhound
+argus_server_user=argus
+argus_loader_user=argus
+argus_snakeeyes_loader_user=argus
+argus_db_user=argus
+
+##ARGUS FILE TRANSFER INFO:
+scpport=3366
+sshport=3366
+
+##BH DB INFO:
+bh_db_ipaddr=localhost
+bh_db_username=bh
+bh_pword=10bh!

@@ -1,0 +1,6 @@
+body {background-color:  #CCCCCC }
+h3 {font: italic small-caps 900 18px arial}
+th {font-style:italic;font-variant:small-caps;font-weight:900;font-size:11px;font-family:arial;text-decoration:underline;background-color:blue;text-transform:uppercase;padding-left:.4cm;padding-right:.4cm}
+td {font-style:italic;font-variant:small-caps;font-weight:500;font-size:12px;font-family:arial;text-align:center;padding-left:.2cm;padding-right:.2cm}
+label {font-variant:small-caps;font-weight:500;font-size:16px;text-align:left}
+p {font: italic small-caps 600 16px arial}

@@ -1,0 +1,23 @@
+1.  Untar BHCOL.tar.gz in the /opt Directory. Or just pull it directly from the github repo
+2.  Unstall wireshark and necessary dependencies.
+	a. Install wireshark 
+           i. sudo apt-get install tshark
+        b.  Add the user to the wireshark group
+           i. sudo adduser $USER wireshark 
+        c. Check network interface
+           i. dumpcap -D
+        d. Test it and verify
+           i. dumpcap -i 1 -w ~/output-file 
+3.  Set the appropriate settings in the bh.conf file (/BHCOL/CONF/)
+	a.  Set the HOSTID to the ASSETID#
+	b.  Set the INT to the Interface Name to capture off of.
+	c.  Set the CAPDUR to the number of seconds the Capture to run for when launched.
+	d.  Set the CAPFILESIZE to the file size in KB.
+	e.  C and D will stop the capture after EITHER is reached.  So if you set the CAPDUR to 10 seconds the capture will STOP after 10 seconds.  If you set the CAPFILESIZE to 51200KB (50 MB) and the CAPDUR to 600 it will end if the file size reaches 50MB OR the capture runs for 10 minutes.
+	f.  Set the DUMPDIR to match where you installed the BHCOL directories.
+4.  Configure CRONTAB to launch the bh_collect.sh collection script.
+	a.  Example: 05 * * * * /opt/dumps/BHCOL/SCRIPTS/bh_collect.sh
+		i.  This line will start the collection at :05 of every HOUR or EVERY DAY.
+5.  Verify the installation is succesful. 
+	a.  Run the /opt/dumps/BHCOL/SCRIPTS/bh_collect.sh (in root mode) and verify logs are correct and no errors appear.
+	b.  Set the crontab in #3 and check it after the cronjob has launched.  

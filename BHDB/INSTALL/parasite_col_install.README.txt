@@ -1,0 +1,2 @@
+Configuring Interface so 'bloodhound' can capture off of it: 
+https://wiki.wireshark.org/CaptureSetup/CapturePrivileges

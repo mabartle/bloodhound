@@ -1,0 +1,63 @@
+#!/bin/sh
+
+#FUNCTION TO CHECK FOR RUN LOG DIRECTORY#
+check_runlogdirectory() {
+#Making Sure the RUN LOG DIRECTORY IS THERE#
+if [ ! -d "$RUNLOGDIR" ]; then
+        /bin/mkdir -m 744 $RUNLOGDIR
+fi
+}
+
+#FUNCTION TO CHECK FOR RUN LOG FILE#
+check_runlogfile(){
+if [ ! -f "$RUNLOGDIR/$DIRDATE.log" ]; then
+        /bin/touch $RUNLOGDIR/$DIRDATE.log
+fi
+}
+
+cap_info(){
+echo "DATE: ${DATE} HOSTID: ${HOSTID} CAPFILE: ${CAPFILENOW} INTERFACE: ${INT} CAPDURATION: ${CAPDUR} CAPFILESIZE: ${CAPFILESIZE} CAPSTARTTIME: ${CAPSTARTTIME} CAPENDTIME: ${CAPENDTIME} Compress Start Time: ${CAPCOMPRESSSTARTTIME} Compress End Time: ${CAPCOMPRESSENDTIME} Capture File Pre Compression: ${CAPFILEUC} Capture File Post Compression: ${CAPFILEAC}" >> $RUNLOGFILE
+}
+
+cap_start(){
+CAPSTARTTIME=`date +%H%M`
+/usr/bin/dumpcap -i $INT -a duration:$CAPDUR -a filesize:$CAPFILESIZE -w $DUMPDIR/$CAPFILENOW
+#/usr/sbin/tcpdump -i $INT -s0 -c $PKTCNT -w $DUMPDIR/$CAPFILENOW
+CAPENDTIME=`date +%H%M`
+}
+
+check_filesizeuc(){
+CAPFILEUC="$(ls -lh $DUMPDIR/$CAPFILENOW | awk '{print $5}')"
+}
+
+check_filesizeac(){
+CAPFILEAC="$(ls -lh $DUMPDIR/$CAPFILENOW.gz | awk '{print $5}')"
+}
+
+file_compress(){
+CAPCOMPRESSSTARTTIME=`date +%H%M`
+/bin/gzip --best $DUMPDIR/$CAPFILENOW
+CAPCOMPRESSENDTIME=`date +%H%M`
+}
+
+check_transportdir(){
+#echo "Creating TRANSPORT Directory......."
+if [ ! -d "$TRANSPORTDIR" ]; then
+        /bin/mkdir -m 744 $TRANSPORTDIR
+fi
+}
+
+check_transportdatedir(){
+if [ ! -d "$TRANSPORTDIR/$DIRDATE" ]; then
+    /bin/mkdir -m 744 $TRANSPORTDIR/$DIRDATE
+    /bin/mkdir -m 744 $TRANSPORTDIR/$DIRDATE/ARCHIVE
+    /bin/mv $DUMPDIR/$CAPFILENOW.gz $TRANSPORTDIR/$DIRDATE
+else
+        /bin/mv $DUMPDIR/$CAPFILENOW.gz $TRANSPORTDIR/$DIRDATE
+fi
+}
+
+set_fileperms(){
+/bin/chown -R $MOVER:$MOVER $TRANSPORTDIR
+#/bin/chmod -R 744 $TRANSPORTDIR
+}
