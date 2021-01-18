@@ -1,6 +1,6 @@
 #!/bin/sh
 ##BH BUILD VERSION
-bh_build_version=BH-2_0-R1
+bh_build_version=BH-3_0-R1
 
 
 ##Bloodhound PATH INFO
@@ -28,4 +28,4 @@ sshport=3366
 ##BH DB INFO:
 bh_db_ipaddr=localhost
 bh_db_username=bh
-bh_pword=10bh!
+bh_pword=21Bloodhound!

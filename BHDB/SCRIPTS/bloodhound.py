@@ -154,7 +154,7 @@ try:
         conn.commit()
 
 
-except MySQLdb.Error, e:
+except MySQLdb.Error as e:
         print "Cannot Connect to Server"
         print "Error %d: %s" % (e.args[0], e.args[1])
         sys.exit(1)
@@ -221,13 +221,13 @@ try:
         conn.commit()
 
 
-except MySQLdb.Error, e:
+except MySQLdb.Error as e:
         print "Cannot Connect to Server"
         print "Error %d: %s" % (e.args[0], e.args[1])
         sys.exit(1)
 
 conn.close()
-print "Disconnected"
+print("Disconnected")
 #sys.exit(0)
 
 
@@ -298,20 +298,20 @@ import MySQLdb
 try:
         conn = MySQLdb.connect ( host = bhdbhost, user = bhdbuser, passwd = bhdbpw, db = bhdbname)
         #conn = MySQLdb.connect ( host = "192.168.50.92", user = "bh", passwd = "10bh!", db = "bloodhound")
-        print "Connected - Loading URL DATA"
+        print("Connected - Loading URL DATA")
         cursor = conn.cursor()
         query = "LOAD DATA LOCAL INFILE '"+outputfile2+"' INTO TABLE  bh_table FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (log_type, capid, procid, @sdate, stime, saddr, daddr, proto, @tcp_dport, @udp_dport, http_user_agent, http_method, http_host, http_request_uri,alert_type) SET sdate = STR_TO_DATE(@sdate, '%m/%d/%Y'), tcp_dport = NULLIF(@tcp_dport,''), udp_dport = NULLIF(@udp_dport,'')"
         cursor.execute( query )
         conn.commit()
 
 
-except MySQLdb.Error, e:
-        print "Cannot Connect to Server"
-        print "Error %d: %s" % (e.args[0], e.args[1])
+except MySQLdb.Error as e:
+        print("Cannot Connect to Server")
+        print("Error %d: %s" % (e.args[0], e.args[1]))
         sys.exit(1)
 
 conn.close()
-print "Disconnected"
+print("Disconnected")
 #sys.exit(0)
 
 
