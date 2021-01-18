@@ -5,7 +5,7 @@ import pdb #for debugging
 from time import sleep
 #pdb.set_trace()
 
-##Blacklist is home grown from tazer and other projects###
+##Blacklist is home grown from tazer and other projects  test ###
 ##SL = Suspect List - This list is home grown.  Using IP addresses seen in investigations as suspect hosts###
 ##ZT = Zeustrackerlist - https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist###
 ##DL = Domain List - http://www.malwaredomains.com/files/domains.txt then parsed for 1 column###
@@ -72,7 +72,7 @@ try:
     fileName = cli[1]
     capID = cli[2]
 except:
-    print "Usage: bloodhound.py <CAPTUREFILENAME> <CAPID>"
+    print("Usage: bloodhound.py <CAPTUREFILENAME> <CAPID>")
     sys.exit()
 
 capStartProcessDate = time.strftime("%Y/%m/%d")
