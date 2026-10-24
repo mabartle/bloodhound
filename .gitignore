@@ -1,0 +1,28 @@
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Local captures, derived outputs, and database volumes
+data/
+captures/
+*.pcap
+*.pcapng
+*.cap
+*.gz
+mysql-data/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Frontend
+node_modules/
+dist/
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
