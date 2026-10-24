@@ -1,0 +1,26 @@
+# Bloodhound Revival — local-only database bootstrap.
+# Do not expose this port beyond localhost. The original schema needs review
+# before initialization because it includes historical credentials and
+# partitions that end in November 2018.
+services:
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Copy .env.example to .env and set a local password}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-bloodhound}
+      MARIADB_USER: ${MARIADB_USER:-bloodhound_app}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?Set MARIADB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${MARIADB_HOST_PORT:-3307}:3306"
+    volumes:
+      - bloodhound-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  bloodhound-db:
