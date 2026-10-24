@@ -82,11 +82,16 @@ def parse_duration(value: str | None):
 
 
 def parse_row(raw: list[str], line_number: int, capid: int, procid: int):
-    # ra omits some trailing empty fields on certain records. Interior empty
-    # CSV fields are preserved by csv.reader; pad only at the right edge.
-    if len(raw) < 19 or len(raw) > EXPECTED_FIELDS:
-        raise ValueError(f"expected 19–21 fields, got {len(raw)}")
-    fields = raw + [""] * (EXPECTED_FIELDS - len(raw))
+    # The observed output has 19, 20, and 21 fields. Until we establish whether
+    # short rows omit only trailing fields or suppress interior empty fields,
+    # reject them rather than risk silently shifting values into the wrong
+    # database columns.
+    if len(raw) != EXPECTED_FIELDS:
+        raise ValueError(
+            f"expected exactly 21 fields for safe mapping, got {len(raw)}; "
+            "regenerate ra output with all fields preserved"
+        )
+    fields = raw
     (srcid, sdate, stime, ldate, ltime, dur, saddr, daddr, proto,
      sport, dport, total_bytes, src_bytes, dst_bytes, total_pkts,
      src_pkts, dst_pkts, direction, trans, seq, flags) = fields
@@ -131,7 +136,6 @@ def main():
     parser.add_argument("--procid", type=int, required=True, help="Bloodhound processing ID")
     parser.add_argument("--dry-run", action="store_true", help="validate only; do not write")
     parser.add_argument("--commit", action="store_true", help="perform database inserts")
-    parser.add_argument("--log-type", default="ARGUSLOG", help=argparse.SUPPRESS)
     args = parser.parse_args()
 
     if args.dry_run and args.commit:
