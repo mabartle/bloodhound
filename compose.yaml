@@ -22,5 +22,35 @@ services:
       retries: 10
       start_period: 30s
 
+  # Optional Phase 1 transport/processing toolchain. It starts idle and does
+  # not connect to collectors or alter data until an explicit command is run.
+  bh-ingest:
+    profiles: ["ingest"]
+    build:
+      context: .
+      dockerfile: docker/ingest/Dockerfile
+    image: bloodhound-ingest:local
+    init: true
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${MARIADB_DATABASE:-bloodhound}
+      DB_USER: ${MARIADB_USER:-bloodhound_app}
+      DB_PASSWORD: ${MARIADB_PASSWORD:?Set MARIADB_PASSWORD in .env}
+    volumes:
+      - ./BHMM/CONF:/etc/bloodhound/bhmm:ro
+      - ./tools:/opt/bloodhound/tools:ro
+      - ./secrets/bhmm-ssh:/run/ssh:ro
+      - ./runtime/bhmm/inbound:/data/inbound
+      - ./runtime/bhmm/processing:/data/processing
+      - ./runtime/bhmm/processed:/data/processed
+      - ./runtime/bhmm/archive:/data/archive
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+
 volumes:
   bloodhound-db:
