@@ -26,3 +26,7 @@ dist/
 .DS_Store
 .vscode/
 .idea/
+
+# BHMM runtime data and private SSH material
+runtime/
+secrets/
